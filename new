@@ -1,0 +1,29 @@
+from selenium import webdriver
+import time
+from selenium.webdriver.common.keys import Keys
+from datetime import datetime
+import warnings
+warnings.filterwarnings("ignore")
+
+driver=webdriver.Chrome(executable_path=r"C:\Users\Aditya\OneDrive\Desktop\chromedriver.exe")
+url = "https://www.linkedin.com/home"
+#driver.get("https://www.linkedin.com/home")
+driver.get(url)
+time.sleep(2)
+email=driver.find_element("xpath","//input[@name='session_key']")
+password=driver.find_element("xpath","//input[@name='session_password']")
+#email.send_keys("My Email")
+#password.send_keys("My Password")
+
+with open(r"C:\Users\Aditya\OneDrive\Desktop\username.txt") as myuser:
+          username=myuser.read().replace('\n','')
+email.send_keys(username)
+    
+with open(r"C:\Users\Aditya\OneDrive\Desktop\password.txt") as mypass:
+          passcode =mypass.read().replace('\n','')
+password.send_keys(passcode)
+
+time.sleep(2)
+
+submit =driver.find_element("xpath", "//button[@type = 'submit']").click()
+time.sleep(2)
